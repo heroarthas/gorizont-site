@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ГОРИЗОНТ | Агентство маркетплейсов</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">Горизонт</div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="services.html" class="nav-link">Услуги</a>
+                <a href="cases.html" class="nav-link">Кейсы</a>
+                <a href="about.html" class="nav-link">О нас</a>
+                <a href="contacts.html" class="nav-link">Контакты</a>
+            </nav>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный герой-экран -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title animate-on-scroll">Ваш рост —<br>наша стратегия.</h1>
+            <p class="hero-subtitle animate-on-scroll">Полное погружение в ваш бизнес на маркетплейсах. От создания карточки до полного ведения и масштабирования.</p>
+            <a href="#game" class="hero-cta animate-on-scroll">Узнать больше</a>
+        </div>
+        <div class="hero-scroll-indicator">Листайте вниз</div>
+    </section>
+
+    <!-- Секция с призывом к действию -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Выводим бизнес на новый уровень</h2>
+            <p class="section-text animate-on-scroll">Мы не просто оказываем услуги, мы становимся частью вашей команды. Наша цель — ваша прибыль.</p>
+            <a href="contacts.html" class="cta-button animate-on-scroll">Обсудить проект</a>
+        </div>
+    </section>
+
+    <!-- Секция "Услуги" (превью) -->
+    <section class="services-preview">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <h3>Полное ведение</h3>
+                    <p>Ежедневный контроль и управление вашими площадками: от ценовой политики до анализа конкурентов.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <h3>Создание карточек</h3>
+                    <p>Разрабатываем продающие карточки товаров, которые выделяются и конвертируют в заказы.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <h3>Аудит аккаунта</h3>
+                    <p>Комплексная проверка вашего аккаунта и карточек для выявления точек роста и ошибок.</p>
+                </div>
+            </div>
+            <div class="center-button">
+                <a href="services.html" class="outline-button animate-on-scroll">Все услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с игрой -->
+    <section id="game" class="game-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Найдите момент для игры</h2>
+            <p class="section-text animate-on-scroll">Стратегия важна даже в мелочах. Сыграйте в классические крестики-нолики.</p>
+            <div class="game-container animate-on-scroll">
+                <div class="game-status" id="status">Ваш ход (X)</div>
+                <div class="board" id="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                <button class="reset-button" id="resetButton">Новая игра</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo">Горизонт</div>
+                    <p>Агентство полного цикла для работы с маркетплейсами.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="services.html">Услуги</a>
+                    <a href="cases.html">Кейсы</a>
+                    <a href="about.html">О нас</a>
+                    <a href="contacts.html">Контакты</a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © ГОРИЗОНТ 2023. Домен горизонт.com
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Логика игры в крестики-нолики
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDisplay = document.getElementById('status');
+            const cells = document.querySelectorAll('.cell');
+            const resetButton = document.getElementById('resetButton');
+
+            let gameActive = true;
+            let currentPlayer = "X";
+            let gameState = ["", "", "", "", "", "", "", "", ""];
+
+            const winningMessage = () => `Игрок ${currentPlayer} победил!`;
+            const drawMessage = () => `Ничья!`;
+            const currentPlayerTurn = () => `Ваш ход (${currentPlayer})`;
+
+            statusDisplay.innerHTML = currentPlayerTurn();
+
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            function handleCellPlayed(clickedCell, clickedCellIndex) {
+                gameState[clickedCellIndex] = currentPlayer;
+                clickedCell.innerHTML = currentPlayer;
+            }
+
+            function handlePlayerChange() {
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+                statusDisplay.innerHTML = currentPlayerTurn();
+            }
+
+            function handleResultValidation() {
+                let roundWon = false;
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                        roundWon = true;
+                        break;
+                    }
+                }
+
+                if (roundWon) {
+                    statusDisplay.innerHTML = winningMessage();
+                    gameActive = false;
+                    return;
+                }
+
+                const roundDraw = !gameState.includes("");
+                if (roundDraw) {
+                    statusDisplay.innerHTML = drawMessage();
+                    gameActive = false;
+                    return;
+                }
+
+                handlePlayerChange();
+            }
+
+            function handleCellClick(clickedCellEvent) {
+                const clickedCell = clickedCellEvent.target;
+                const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+                if (gameState[clickedCellIndex] !== "" || !gameActive) return;
+
+                handleCellPlayed(clickedCell, clickedCellIndex);
+                handleResultValidation();
+            }
+
+            function handleRestartGame() {
+                gameActive = true;
+                currentPlayer = "X";
+                gameState = ["", "", "", "", "", "", "", "", ""];
+                statusDisplay.innerHTML = currentPlayerTurn();
+                cells.forEach(cell => cell.innerHTML = "");
+            }
+
+            cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+            resetButton.addEventListener('click', handleRestartGame);
+        });
+    </script>
+</body>
+</html>
